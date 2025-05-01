@@ -14,6 +14,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api', searchRoutes);
 
+app.use(express.static(path.join(_dirname, "/client/dist")));
+app.get('*', (_ , res) => {
+    res.sendFile(path.resolve(_dirname, "client", "dist", "index.html"));
+})
+
 
 
 app.listen(5000, () => console.log("Server running on port 5000"));
